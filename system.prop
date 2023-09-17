@@ -2,6 +2,13 @@
 # system props for sdm660
 #
 
+# ART
+dalvik.vm.dex2oat-filter=quicken
+dalvik.vm.image-dex2oat-filter=quicken
+pm.dexopt.first-boot=quicken
+pm.dexopt.bg-dexopt=everything
+ro.sys.fw.dex2oat_thread_count=8
+
 # Audio
 use.voice.path.for.pcm.voip=false
 
