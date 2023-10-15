@@ -6,7 +6,7 @@
 
 LOCAL_PATH := $(call my-dir)
 
-ifneq ($(filter payton evert chef beckham lake, $(TARGET_DEVICE)),)
+ifneq ($(filter evert beckham lake, $(TARGET_DEVICE)),)
 
 include $(call all-makefiles-under,$(LOCAL_PATH))
 
