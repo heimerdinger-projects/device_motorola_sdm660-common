@@ -1,25 +1,7 @@
 #
 # Copyright (C) 2017 The LineageOS Project
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#      http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-
-#
-# This file sets variables that control the way modules are built
-# thorughout the system. It should not be used to conditionally
-# disable makefiles (the proper mechanism to control what gets
-# included in a build is to use PRODUCT_PACKAGES in a product
-# definition file).
+# SPDX-License-Identifier: Apache-2.0
 #
 
 PLATFORM_PATH := device/motorola/sdm660-common
@@ -29,7 +11,7 @@ TARGET_SPECIFIC_HEADER_PATH := $(PLATFORM_PATH)/include
 # APEX
 OVERRIDE_TARGET_FLATTEN_APEX := true
 
-# Platform
+# Architeture
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
 TARGET_CPU_ABI := arm64-v8a
@@ -44,17 +26,19 @@ TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := generic
 TARGET_2ND_CPU_VARIANT_RUNTIME := cortex-a73
 
-BOARD_USES_QCOM_HARDWARE := true
-TARGET_BOOTLOADER_BOARD_NAME := SDM660
-TARGET_BOARD_PLATFORM := sdm660
-
-BUILD_BROKEN_DUP_RULES := true
-BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
-
 # Audio
 AUDIO_FEATURE_ENABLED_EXTENDED_COMPRESS_FORMAT := true
 BOARD_SUPPORTS_SOUND_TRIGGER := true
 BOARD_USES_ALSA_AUDIO := true
+
+# Bootloader / Platform
+BOARD_USES_QCOM_HARDWARE := true
+TARGET_BOOTLOADER_BOARD_NAME := SDM660
+TARGET_BOARD_PLATFORM := sdm660
+
+# Build
+BUILD_BROKEN_DUP_RULES := true
+BUILD_BROKEN_ELF_PREBUILT_PRODUCT_COPY_FILES := true
 
 # Display
 TARGET_USES_ION := true
@@ -66,12 +50,14 @@ BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
 LOC_HIDL_VERSION := 3.0
 
 # HIDL
-DEVICE_MANIFEST_FILE := $(PLATFORM_PATH)/manifest.xml
-DEVICE_MATRIX_FILE := $(PLATFORM_PATH)/compatibility_matrix.xml
-DEVICE_FRAMEWORK_MANIFEST_FILE := $(PLATFORM_PATH)/framework_manifest.xml
+DEVICE_MANIFEST_FILE := $(PLATFORM_PATH)/configs/vintf/manifest.xml
+DEVICE_MATRIX_FILE := $(PLATFORM_PATH)/configs/vintf/compatibility_matrix.xml
+DEVICE_FRAMEWORK_MANIFEST_FILE := $(PLATFORM_PATH)/configs/vintf/framework_manifest.xml
+ODM_MANIFEST_QCRIL_FILES := $(PLATFORM_PATH)/configs/vintf/odm_manifest_qcril.xml
+ODM_MANIFEST_SKUS += qcril
 TARGET_FS_CONFIG_GEN += \
-    $(PLATFORM_PATH)/config.fs \
-    $(PLATFORM_PATH)/mot_aids.fs
+    $(PLATFORM_PATH)/configs/config.fs \
+    $(PLATFORM_PATH)/configs/mot_aids.fs
 
 # Init
 TARGET_INIT_VENDOR_LIB := //$(PLATFORM_PATH):libinit_sdm660
@@ -89,7 +75,7 @@ BOARD_KERNEL_CMDLINE += androidboot.veritymode=eio
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_IMAGE_NAME := Image.gz-dtb
-TARGET_KERNEL_SOURCE := kernel/motorola/msm8998
+TARGET_KERNEL_SOURCE := kernel/motorola/sdm660
 
 # Lights
 TARGET_PROVIDES_LIBLIGHT := true
@@ -117,8 +103,6 @@ TARGET_VENDOR_PROP += $(PLATFORM_PATH)/vendor.prop
 # RIL
 TARGET_PROVIDES_QTI_TELEPHONY_JAR := true
 CUSTOM_APNS_FILE := $(PLATFORM_PATH)/configs/sprint_apns.xml
-ODM_MANIFEST_SKUS += qcril
-ODM_MANIFEST_QCRIL_FILES := $(PLATFORM_PATH)/odm_manifest_qcril.xml
 
 # Root
 BOARD_ROOT_EXTRA_SYMLINKS := \
