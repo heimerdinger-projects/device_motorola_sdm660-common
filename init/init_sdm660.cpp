@@ -115,4 +115,5 @@ void vendor_load_properties()
 
     // Misc
     property_override("ro.apex.updatable", "false");
+    property_override("ro.treble.enabled", "");
 }
