@@ -14,7 +14,7 @@ PRODUCT_EXTRA_VNDK_VERSIONS := 30
 
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay
-PRODUCT_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay-pe
+PRODUCT_PACKAGE_OVERLAYS += $(LOCAL_PATH)/overlay-lineage
 PRODUCT_ENFORCE_RRO_TARGETS := *
 
 PRODUCT_PACKAGES += \
@@ -25,7 +25,6 @@ PRODUCT_PACKAGES += \
     android.hardware.audio@2.0-impl \
     android.hardware.audio@2.0-service \
     android.hardware.audio@4.0-impl \
-    android.hardware.audio@4.0-service \
     android.hardware.audio.service \
     android.hardware.audio.effect@4.0-impl \
     audio.r_submix.default \
@@ -60,7 +59,6 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth.audio-impl \
     android.hardware.bluetooth@1.0.vendor \
     audio.bluetooth.default \
-    libldacBT_bco \
     vendor.qti.hardware.btconfigstore@1.0.vendor
 
 # Boot control HAL
